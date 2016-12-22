@@ -1,0 +1,16 @@
+general {
+        colors = true
+        interval = 5
+}
+
+order += "ethernet _first_"
+order += "tztime local"
+
+ethernet _first_ {
+  format_up = "%ip"
+  format_down = ""
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
