@@ -1,0 +1,46 @@
+{
+ "name": "vcl",
+ "displayName": "VCL - Varnish Configuration Language",
+ "description": "Syntax highlighting for Varnish Configuration Language and Ansible templates for Varnish ",
+ "version": "0.1.2",
+ "icon": "images/varnish.jpg",
+ "galleryBanner": {
+  "color": "#5c2d91",
+  "theme": "dark"
+ },
+ "publisher": "thomas-baumgaertner",
+ "engines": {
+  "vscode": "^1.0.0"
+ },
+ "categories": [
+  "Languages"
+ ],
+ "contributes": {
+  "languages": [
+   {
+    "id": "vcl",
+    "aliases": [
+     "VCL",
+     "vcl"
+    ],
+    "extensions": [
+     ".vcl",
+     ".vcl.j2"
+    ],
+    "configuration": "./vcl.configuration.json"
+   }
+  ],
+  "grammars": [
+   {
+    "language": "vcl",
+    "scopeName": "source.varnish.vcl",
+    "path": "./syntaxes/vcl.json"
+   }
+  ]
+ },
+ "__metadata": {
+  "id": "7daf040e-c08c-410d-b12d-1737d01bcfe5",
+  "publisherId": "332780ed-fd0c-4b97-924c-89af3f24da66",
+  "publisherDisplayName": "Thomas Baumgärtner"
+ }
+}

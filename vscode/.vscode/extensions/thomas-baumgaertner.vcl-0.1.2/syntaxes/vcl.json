@@ -1,0 +1,385 @@
+{
+  "scopeName": "source.varnish.vcl",
+  "fileTypes": [
+    "vcl",
+    "vcl.j2"
+  ],
+  "foldingStartMarker": "^.*\\b(backend|sub)\\s*(\\w+\\s*)?(\\s*\\{[^\\}]*)?\\s*$",
+  "foldingStopMarker": "^\\s*\\}",
+  "name": "VCL",
+  "patterns": [
+
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#keyword-acl"
+    },
+    {
+      "include": "#keyword-probe"
+    },
+    {
+      "include": "#keyword-backend"
+    },
+    {
+      "include": "#keyword-import"
+    },
+    {
+      "include": "#keyword-sub"
+    },
+    {
+      "include": "#keywords-others"
+    },
+    {
+      "include": "#keywords-j2-others"
+    }
+  ],
+  "repository": {
+    "backend-probe-subkeys": {
+      "patterns": [
+        {
+          "begin": "\\.(url)\\s*=",
+          "captures": {
+            "1": {
+              "name": "keyword.backend.probe.url.vcl"
+            }
+          },
+          "end": ";",
+          "name": "meta.backend.probe.subkeys.url.vcl",
+          "patterns": [
+            {
+              "include": "#quoted-string"
+            }
+          ]
+        },
+        {
+          "begin": "\\.(timeout|interval)\\s*=",
+          "captures": {
+            "1": {
+              "name": "keyword.backend.probe.time.vcl"
+            }
+          },
+          "end": ";",
+          "name": "meta.backend.probe.subkeys.time.vcl",
+          "patterns": [
+            {
+              "include": "#time-spec"
+            }
+          ]
+        },
+        {
+          "begin": "\\.(window|threshold)\\s*=",
+          "captures": {
+            "1": {
+              "name": "keyword.backend.probe.window.vcl"
+            }
+          },
+          "end": ";",
+          "name": "meta.backend.probe.subkeys.window.vcl",
+          "patterns": [
+            {
+              "include": "#number-spec"
+            }
+          ]
+        }
+      ]
+    },
+    "backend-subkeys": {
+      "patterns": [
+        {
+          "begin": "\\.(host|port|probe|ssl_nosni|ssl_noverify|ssl)\\s*=",
+          "captures": {
+            "1": {
+              "name": "keyword.backend.subkeys.vcl"
+            }
+          },
+          "end": ";",
+          "name": "meta.backend.subkeys.string.vcl",
+          "patterns": [
+            {
+              "include": "#quoted-string"
+            }
+          ]
+        },
+        {
+          "begin": "\\.(probe)\\s*=\\s*{",
+          "captures": {
+            "1": {
+              "name": "keyword.backend.probe.vcl"
+            }
+          },
+          "end": "}",
+          "name": "meta.backend.probe.vcl",
+          "patterns": [
+            {
+              "include": "#backend-probe-subkeys"
+            }
+          ]
+        },
+        {
+          "begin": "\\.(connect_timeout|first_byte_timeout|between_bytes_timeout)\\s*=",
+          "captures": {
+            "1": {
+              "name": "keyword.backend.subkeys.timeout.vcl"
+            }
+          },
+          "end": ";",
+          "name": "meta.backend.subkeys.timeout.vcl",
+          "patterns": [
+            {
+              "include": "#time-spec"
+            }
+          ]
+        },
+        {
+          "begin": "\\.(max_connections)\\s*=",
+          "captures": {
+            "1": {
+              "name": "keyword.backend.subkeys.connect.vcl"
+            }
+          },
+          "end": ";",
+          "name": "meta.backend.subkeys.connect.vcl",
+          "patterns": [
+            {
+              "include": "#number-spec"
+            }
+          ]
+        }
+      ]
+    },
+    "comment": {
+      "patterns": [
+        {
+          "begin": "/\\*",
+          "end": "\\*/",
+          "name": "comment.block.vcl"
+        },
+        {
+          "match": "(#|//).*$\\n?",
+          "name": "comment.line.vcl"
+        }
+      ]
+    },
+
+    "j2-marker": {
+      "patterns": [
+        {
+          "begin": "{{",
+          "end": "}}",
+          "name": "j2.block.vcl"
+        }
+      ]
+    },
+    
+    "keywords-j2-others": {
+      "patterns": [
+        {
+          "match": "({%)\\s+\\b(for|endfor|if|endif)\\b(.*)(%})",
+          "captures": {
+           "1": {
+              "name": "keyword.start.j2.vcl"
+            },
+            "2": {
+              "name": "keyword.name.j2.vcl"
+            },
+            "4": {
+              "name": "keyword.end.j2.vcl"
+            }
+          },
+          "name": "control.other.j2.vcl"
+        }
+      ]
+    },
+    "function-invocation": {
+      "captures": {
+        "1": {
+          "name": "entity.name.function.vcl"
+        }
+      },
+      "match": "\\b(\\S+)\\((.*)\\)",
+      "name": "meta.control.function"
+    },
+    "keyword-acl": {
+      "patterns": [
+        {
+          "match": "\\b(acl)\\b",
+          "name": "keyword.other.vcl.acl"
+        }
+      ]
+    },
+    "keyword-probe": {
+      "begin": "\\b(probe)\\s+(.*){{1}",
+      "captures": {
+        "1": {
+          "name": "keyword.control.probe.vcl"
+        },
+        "2": {
+          "name": "entity.name.probe.vcl"
+        }
+      },
+      "end": "}{1}",
+      "name": "meta.probe.vcl",
+      "patterns": [
+        {
+          "include": "#backend-probe-subkeys"
+        }
+      ]
+    },
+    "keyword-backend": {
+      "begin": "\\b(backend)\\s+(.*){{1}",
+      "captures": {
+        "1": {
+          "name": "keyword.control.backend.vcl"
+        },
+        "2": {
+          "name": "entity.name.backend.vcl"
+        }
+      },
+      "end": "}{1}",
+      "name": "meta.backend.vcl",
+      "patterns": [
+        {
+          "include": "#backend-subkeys"
+        }
+      ]
+    },
+    "keyword-import": {
+      "captures": {
+        "1": {
+          "name": "keyword.control.import.vcl"
+        },
+        "2": {
+          "name": "entity.name.import.vcl"
+        }
+      },
+      "match": "\\b(import)\\s+([a-zA-Z0-9_]+)",
+      "name": "meta.import.vcl"
+    },
+    "keyword-sub": {
+      "patterns": [
+        {
+          "begin": "\\b(sub)\\s+([a-zA-Z0-9_]+)\\s*{",
+          "captures": {
+            "1": {
+              "name": "keyword.sub.vcl.action"
+            },
+            "2": {
+              "name": "entity.name.function.vcl"
+            }
+          },
+          "end": "}",
+          "name": "meta.sub.vcl",
+          "patterns": [
+            {
+              "include": "#sub-body"
+            }
+          ]
+        },
+        {
+              "include": "#sub-body"
+        }
+      ]
+    },
+    "keywords-others": {
+      "patterns": [
+        {
+          "match": "\\b(director|probe|vcl|include)\\b",
+          "name": "keyword.other.vcl"
+        }
+      ]
+    },
+    "number-spec": {
+      "patterns": [
+        {
+          "match": "\\d",
+          "name": "constant.numeric.vcl"
+        }
+      ]
+    },
+    "quoted-string": {
+      "begin": "\"",
+      "end": "\"",
+      "name": "string.quoted.double.vcl",
+      "patterns": [
+        {
+          "include": "#j2-marker"
+        }
+      ]
+    },
+    "sub-body": {
+      "patterns": [
+        {
+          "match": "\\b(call|hash_data|panic|ban|ban_url|remove|return|rollback|set|synth|synthetic|unset|purge|error)\\b",
+          "name": "keyword.control.vcl.action"
+        },
+        {
+          "begin": "\\b(if|elseif|elsif)\\b\\s*\\(",
+          "captures": {
+            "1": {
+              "name": "keyword.control.vcl.if"
+            }
+          },
+          "end": "}{1}",
+          "name": "meta.control.vcl.if",
+          "patterns": [
+            {
+              "include": "#sub-body"
+            }
+          ]
+        },
+        {
+          "begin": "\\b(else)\\s*(\\{\\s*|$)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.vcl.else"
+            }
+          },
+          "end": "}",
+          "name": "meta.control.vcl.else",
+          "patterns": [
+            {
+              "include": "#sub-body"
+            }
+          ]
+        },
+        {
+          "match": "\\b(regsub|regsuball|true|false|hash|lookup|pass|pipe|deliver|fetch|restart|req|bereq|resp|beresp|std|http|backend_hint)\\b(?![?!])",
+          "name": "constant.language.vcl"
+        },
+        {
+          "begin": "\\.(ttl|grace)\\s*=",
+          "captures": {
+            "1": {
+              "name": "support.other.ttl.vcl"
+            }
+          },
+          "end": ";",
+          "name": "meta.backend.subkeys.time.vcl",
+          "patterns": [
+            {
+              "include": "#time-spec"
+            }
+          ]
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#quoted-string"
+        },
+        {
+          "include": "#keywords-j2-others"
+        }
+      ]
+    },
+    "time-spec": {
+      "patterns": [
+        {
+          "match": "\\d+\\s*(s|m|h|d|w|y|ms)",
+          "name": "constant.numeric.time.vcl"
+        }
+      ]
+    }
+  }
+}
