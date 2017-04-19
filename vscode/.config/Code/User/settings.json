@@ -1,0 +1,26 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "gitProjectManager.baseProjectsFolders": [
+        "~/Projects"
+    ],
+    "terminal.integrated.shell.linux": "/usr/bin/fish",
+    "terminal.integrated.shell.windows": "powershell.exe",
+    "editor.minimap.enabled": true,
+    "editor.wordWrap": "off",
+    "editor.renderWhitespace": "none",
+    "emmet.syntaxProfiles": {
+        "lang-cfml": "html"
+    },
+    "amVim.bindCtrlCommands": false,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "workbench.colorTheme": "Dracula",
+    "workbench.iconTheme": "vs-seti",
+    "window.zoomLevel": 1,
+    "editor.renderIndentGuides": true,
+    "[go]": {
+        "editor.insertSpaces": false,
+        "editor.renderWhitespace": "none"
+    },
+    "editor.fontSize": 13
+}

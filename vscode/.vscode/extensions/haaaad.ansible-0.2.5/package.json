@@ -1,0 +1,52 @@
+{
+	"name": "ansible",
+	"displayName": "language-Ansible",
+	"description": "Ansible syntax highlighting support",
+	"version": "0.2.5",
+	"publisher": "haaaad",
+	"engines": {
+		"vscode": "^1.0.0"
+	},
+	"keywords": [
+		"ansible"
+	],
+	"categories": [
+		"Languages"
+	],
+	"license": "MIT",
+	"icon": "images/ansible.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/haad/vs-language-ansible.git"
+	},
+	"bugs": {
+		"url": "https://github.com/haad/vs-language-ansible/issues"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "ansible",
+				"aliases": [
+					"Ansible",
+					"ansible"
+				],
+				"extensions": [
+					"ansible"
+				],
+				"configuration": "./ansible.configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "ansible",
+				"scopeName": "source.ansible",
+				"path": "./syntaxes/ansible.tmLanguage"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "c821cdcd-134b-4c94-99ab-34d3cd83ab74",
+		"publisherId": "073d0072-1bab-449e-ac71-942524d029e1",
+		"publisherDisplayName": "haaaad"
+	}
+}

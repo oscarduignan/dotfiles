@@ -1,0 +1,11 @@
+{
+	// When in HTML documents, let the base language handle comments
+	// "comments": {
+	// 	"lineComment": "#"
+	// },
+	"brackets": [
+		["{", "}"],
+		["[", "]"],
+		["(", ")"]
+	]
+}

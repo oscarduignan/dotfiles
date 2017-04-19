@@ -1,0 +1,18 @@
+setup_plesk:
+  cmd.run:
+    - name: |
+        PSA_PASSWORD={{ pass }} /usr/sbin/plesk bin init_conf --init -shared_ips add:{{ ip }} -license_agreed true 
+        -admin_info_not_required true -send_announce false -send_tech_announce false -hostname {{ fqdn }} -passwd "" 
+        -company plesk.ru -name Administrator -email {{ email }}
+        ...
+
+setup_plesk:
+  cmd.run:
+    - name: PSA_PASSWORD={{ pass }} /usr/sbin/plesk bin init_conf --init -shared_ips add:{{ ip }} -license_agreed true 
+    -admin_info_not_required true -send_announce false -send_tech_announce false -hostname {{ fqdn }} -passwd "" 
+    -company plesk.ru -name Administrator -email {{ email }}
+
+create_default_subscription:
+  cmd.run:
+    - name: /usr/sbin/plesk bin subscription -c {{ fqdn }} -hosting true -ip {{ ip }} -login support -passwd $(/usr/bin/openssl rand -base64 12)
+    - unless: /usr/sbin/plesk bin subscription -i {{ fqdn }} &>/dev/null
