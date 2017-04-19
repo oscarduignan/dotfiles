@@ -11,6 +11,8 @@ exec --no-startup-id compton --config ~/.config/compton.conf -b
 bindsym --release Print exec --no-startup-id scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png
 bindsym --release Shift+Print exec --no-startup-id scrot -s ~/screenshots/%Y-%m-%d-%T-screenshot.png
 
+bindsym F8 exec emacsclient -c --alternate-editor=""
+
 new_window pixel 1
 
 # i3 config file (v4)
@@ -74,6 +76,10 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# move between workspaces
+bindsym $mod+Control+Left move workspace to output left
+bindsym $mod+Control+Right move workspace to output right
+
 # split in horizontal orientation
 bindsym $mod+h split h
 
@@ -112,6 +118,8 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+bindsym $mod+Tab workspace back_and_forth
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -122,7 +130,7 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace 10r
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
