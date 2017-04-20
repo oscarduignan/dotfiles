@@ -1,8 +1,5 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "gitProjectManager.baseProjectsFolders": [
-        "~/Projects"
-    ],
     "terminal.integrated.shell.linux": "/usr/bin/fish",
     "terminal.integrated.shell.windows": "powershell.exe",
     "editor.minimap.enabled": true,
@@ -22,5 +19,6 @@
         "editor.insertSpaces": false,
         "editor.renderWhitespace": "none"
     },
-    "editor.fontSize": 13
+    "editor.fontSize": 13,
+    "projectManager.openInNewWindow": false
 }
